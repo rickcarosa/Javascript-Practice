@@ -14,8 +14,35 @@
 </div>
     
 <script>
+    //setting to speech recoginition
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+
+    let p = document.createElement('p');
+    const words = document.querySelector('.words');
+    words.appendChild(p)
+
+    recognition.addEventListener('result', e => {
+        const transcript = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('')
+
+        //creates a paragraph for each time you talk
+        p.textContent = transcript;
+        if(e.results[0].isFinal){               // isFinal is an value on the speechrecognition object
+            p = document.createElement('p');
+            words.appendChild(p);
+        }
+        
+        console.log(transcript)
+    })
+
+    recognition.addEventListener('end', recognition.start); //if you invoke recognition.start it will run on page load. you just want to give it the name of the function
+
+    recognition.start()
     
 </script>
           
