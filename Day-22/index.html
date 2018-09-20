@@ -29,6 +29,34 @@
         
     <script>
             // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+            const triggers = document.querySelectorAll('a');
+            const highlight = document.createElement('span');
+            highlight.classList.add('highlight');
+            document.body.append(highlight)
+
+            function highlightLink (){
+                const linkCoords = this.getBoundingClientRect() //gets coordinates of where on the page each link lives
+                // console.log('linkCoords');
+                // need to set your own coordinates to get the highlight to follow you around when you scroll
+                const coords = {
+                    width: linkCoords.width,
+                    height: linkCoords.height,
+                    top: linkCoords.top + window.scrollY,
+                    left: linkCoords.left + window.scrollX
+                }
+
+                highlight.style.width = `${coords.width}px`;
+                highlight.style.height = `${coords.height}px`;
+                highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+                
+            }
+
+            // run the function for each time you hover over links
+            triggers.forEach(a => a.addEventListener('mouseenter', highlightLink))
+
+
+            
     </script>
     
 </body>
