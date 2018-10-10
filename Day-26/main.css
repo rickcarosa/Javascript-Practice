@@ -64,6 +64,14 @@ html {
   }
 
   .trigger-enter .dropdown {
+      display: block;
+  }
+
+  .trigger-enter-active .dropdown {
+      opacity: 1;
+  }
+
+  .trigger-enter .dropdown {
     display: block;
   }
 
